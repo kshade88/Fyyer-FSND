@@ -1,0 +1,15 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Add Genre{% endblock %}
+{% block content %}
+  <div class="form-wrapper">
+    <form method="post" class="form">
+      <h3 class="form-heading">Add a new genre</h3>
+      <div class="form-group">
+        <label for="name"></label>
+        {{ form.csrf_token }}
+        {{ form.name(class_ = 'form-control', autofocus = true) }}
+      </div>
+      <input type="submit" value="Add" class="btn btn-primary btn-lg btn-block">
+    </form>
+  </div>
+{% endblock %}

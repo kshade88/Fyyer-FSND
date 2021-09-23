@@ -1,0 +1,34 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+<h1>{{ genre.name }}</h1>
+
+  <h3>Venues</h3>
+    <ul class="items">
+      {% for venue in genre.venues %}
+        <li>
+		<a href="/venues/{{ venue.id }}">
+			<i class="fas fa-music"></i>
+			<div class="item">
+				<h5>{{ venue.name }}</h5>
+			</div>
+		</a>
+	</li>
+      {% endfor %}
+    </ul>
+
+  <h3>Artists</h3>
+    <ul class="items">
+      {% for artist in genre.artists %}
+
+        <li>
+		<a href="/artists/{{ artist.id }}">
+			<i class="fas fa-users"></i>
+			<div class="item">
+				<h5>{{ artist.name }}</h5>
+			</div>
+		</a>
+	    </li>
+
+      {% endfor %}
+    </ul>
+{% endblock %}

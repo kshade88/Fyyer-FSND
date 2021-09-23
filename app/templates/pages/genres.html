@@ -1,0 +1,18 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+<h3>
+	<a href="/genres/add_new"><button class="btn btn-default btn-lg">Add Genre</button></a>
+</h3>
+<ul class="items">
+  {% for genre in genres %}
+    <li>
+		<a href="/genres/{{ genre.id }}">
+			<i class="fas fa-music"></i>
+			<div class="item">
+				<h5>{{ genre.name }}</h5>
+			</div>
+		</a>
+	</li>
+  {% endfor %}
+</ul>
+{% endblock %}
