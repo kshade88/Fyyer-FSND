@@ -104,9 +104,9 @@ def show_venue(venue_id):
 
     return render_template('pages/show_venue.html', venue=data)
 
+
 #  Create Venue
 #  ----------------------------------------------------------------
-
 
 @app.route('/venues/create', methods=['GET'])
 def create_venue_form():
@@ -174,7 +174,6 @@ def delete_venue(venue_id):
 #  Artists
 #  ----------------------------------------------------------------
 
-
 @app.route('/artists')
 def artists():
     data = Artist.query.order_by('id').all()
@@ -204,7 +203,6 @@ def search_artists():
 
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):
-
     artist = Artist.query.get(artist_id)
     upcoming_shows = db.session.query(
         Venue, Show).join(Show).join(Artist).filter(
@@ -322,9 +320,9 @@ def edit_venue_submission(venue_id):
 
     return redirect(url_for('show_venue', venue_id=venue_id))
 
+
 #  Create Artist
 #  ----------------------------------------------------------------
-
 
 @app.route('/artists/create', methods=['GET'])
 def create_artist_form():
@@ -431,26 +429,8 @@ def create_show_submission():
     return render_template('pages/home.html')
 
 
-@app.errorhandler(404)
-def not_found_error(error):
-    return render_template('errors/404.html'), 404
-
-
-@app.errorhandler(500)
-def server_error(error):
-    return render_template('errors/500.html'), 500
-
-
-if not app.debug:
-    file_handler = FileHandler('error.log')
-    file_handler.setFormatter(
-        Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
-    )
-    app.logger.setLevel(logging.INFO)
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
-    app.logger.info('errors')
-
+#  Genres
+#  ----------------------------------------------------------------
 
 @app.route('/genres')
 def genres():
@@ -470,6 +450,7 @@ def add_genre():
     form = GenreForm()
     return render_template('forms/add_genre.html', form=form)
 
+
 @app.route('/genres/add_new', methods=['POST'])
 def add_genre_submission():
     form = GenreForm()
@@ -487,3 +468,27 @@ def add_genre_submission():
         flash('Genre could not be added!')
         flash(form.errors)
     return render_template('forms/add_genre.html', form=form)
+
+
+#  Error Handlers
+#  ----------------------------------------------------------------
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template('errors/500.html'), 500
+
+
+if not app.debug:
+    file_handler = FileHandler('error.log')
+    file_handler.setFormatter(
+        Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+    )
+    app.logger.setLevel(logging.INFO)
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    app.logger.info('errors')
